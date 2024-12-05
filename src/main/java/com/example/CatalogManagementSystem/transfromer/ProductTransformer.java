@@ -14,7 +14,6 @@ public class ProductTransformer {
 //                .category(productRequest.getCategory())
 //                .quantity(productRequest.getQuantity())
 //                .brand(productRequest.getBrand())
-////                .createdAt(dateAdded)
 //                .build();
         Product product = new Product();
         product.setBrand(productRequest.getBrand());

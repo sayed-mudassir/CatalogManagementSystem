@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
 @Entity
 @AllArgsConstructor
-
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Table(name = "product")
@@ -20,8 +20,10 @@ import java.util.Date;
 /*
  * @Data annotation hold the properties of :
  * @Getters, @Setters and @RequiredArgsConstructor
+ *
  */
-//@Builder lombok is not working properly
+
+//@Builder  //lombok is not working properly thats why I use mannual getters and setters
 
 public class Product {
     @Id
@@ -40,12 +42,12 @@ public class Product {
     /**
      * @NotNull Purpose: Ensures that the annotated field is not null. It does not impose any constraint on the actual content (e.g., empty or whitespace).
      */
-
-    @NotBlank
-    String brand;
     /**
      * @NotBlank Purpose: Ensures that the annotated field is not null and is not empty or made up only of whitespace.
      */
+    @NotBlank
+    String brand;
+
 
     @NotBlank
     String category; // we can also use ENUM instead of String
@@ -64,18 +66,20 @@ public class Product {
      */
 
 ////    Add Auditing Fields
-//    @CreatedDate
-//    private Date createdAt;
-//
-//    @LastModifiedDate
-//    private Date updatedAt;
+    @LastModifiedDate
+    Date updatedAt = new Date();
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public Long getId() {
         return id;
     }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;
@@ -127,10 +131,6 @@ public class Product {
 
     public Date getDateAdded() {
         return dateAdded;
-    }
-
-    public void setDateAdded(Date dateAdded) {
-        this.dateAdded = dateAdded;
     }
 
 }

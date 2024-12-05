@@ -6,9 +6,9 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 
-@Data
+//@Data // lombok is not working properly
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
+//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest {

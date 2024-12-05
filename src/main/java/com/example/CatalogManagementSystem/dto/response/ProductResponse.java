@@ -5,9 +5,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
 
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
 //@AllArgsConstructor
 @NoArgsConstructor
 
