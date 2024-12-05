@@ -12,6 +12,11 @@ public interface ProductService {
     public List<Product> getAllProducts();
     public Product getProductById(Long id);
     public ProductResponse updateProduct(Long id, ProductRequest updatedProduct);
+    public List<Product> getAllProductByBrand(String brand);
+    public List<Product> getAllProductByCategory(String category);
+    public List<Product> getALlProductByNameContaining(String keyword);
+    public List<Product> getALlProductByPriceRange(Double min, Double max);
     public String deleteProduct(Long id);
+//
 }
 

@@ -1,9 +1,7 @@
 package com.example.CatalogManagementSystem.dto.request;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,22 +12,72 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest {
-
-    @NotBlank(message = "Name is mandatory")
+    @Column(nullable = false) // @Column is used to restrict the column properties
+    @Size(min = 2, message = "{validation.name.size.too_short}")
+    @Size(max = 40, message = "{validation.name.size.too_long}") // @Size annotation is used to restrict the min or max limit
+    @NotBlank
     String name;
 
-    @Min(value = 1, message = "Quantity must be at least 1")
+    @NotNull
     Integer quantity;
 
-    @NotBlank(message = "Brand is mandatory")
+    @NotBlank
     String brand;
 
-    @NotBlank(message = "Category is mandatory")
-    String category;
+
+    @NotBlank
+    String category; // we can also use ENUM instead of String
 
     String description;
-
-    @NotNull(message = "Price is mandatory")
-    @Positive(message = "Price must be positive")
+    @NotNull
     Double price;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }

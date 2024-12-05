@@ -7,30 +7,36 @@ import com.example.CatalogManagementSystem.model.Product;
 public class ProductTransformer {
     public static Product ProductRequestToProduct(ProductRequest productRequest){
 
-        return Product.builder()
-                .name(productRequest.getName())
-                .price(productRequest.getPrice())
-                .description(productRequest.getDescription())
-                .category(productRequest.getCategory())
-                .quantity(productRequest.getQuantity())
-                .brand(productRequest.getBrand())
-//                .createdAt(dateAdded)
-                .build();
-//        Product product = new Product();
-//        product.setQuantity(productRequest.getQuantity());
-//        product.setCategory(productRequest.getCategory());
-//        return product;
+//        return Product.builder()
+//                .name(productRequest.getName())
+//                .price(productRequest.getPrice())
+//                .description(productRequest.getDescription())
+//                .category(productRequest.getCategory())
+//                .quantity(productRequest.getQuantity())
+//                .brand(productRequest.getBrand())
+////                .createdAt(dateAdded)
+//                .build();
+        Product product = new Product();
+        product.setBrand(productRequest.getBrand());
+        product.setCategory(productRequest.getCategory());
+        product.setName(productRequest.getName());
+        product.setPrice(productRequest.getPrice());
+        product.setDescription(productRequest.getDescription());
+        product.setQuantity(productRequest.getQuantity());
+        return product;
     }
     public static ProductResponse ProductToProductResponse(Product product, String msg){
-        return ProductResponse.builder()
-                .name(product.getName())
-                .brand(product.getBrand())
-                .category(product.getCategory())
-                .dateAdded(product.getDateAdded())
-                .description(product.getDescription())
-                .price(product.getPrice())
-                .quantity(product.getQuantity())
-                .msg(msg)
-                .build();
+
+        ProductResponse productResponse = new ProductResponse(
+                product.getName(),
+                product.getQuantity(),
+                product.getBrand(),
+                product.getCategory(),
+                product.getDescription(),
+                product.getPrice(),
+                product.getDateAdded(),
+                msg);
+
+                return productResponse;
     }
 }

@@ -37,9 +37,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse addProduct(ProductRequest productRequest) {
-        Product savedProduct = ProductTransformer.ProductRequestToProduct(productRequest);
-        productRepository.save(savedProduct);
-        return ProductTransformer.ProductToProductResponse(savedProduct,"product added successfully");
+        Product product = ProductTransformer.ProductRequestToProduct(productRequest);
+        productRepository.save(product);
+        return ProductTransformer.ProductToProductResponse(product,"product added successfully");
     }
 
     @Override
@@ -54,7 +54,6 @@ public class ProductServiceImpl implements ProductService {
         }
         return productRepository.findById(id).get();
     }
-
     @Override
     public ProductResponse updateProduct(Long id, ProductRequest updatedProduct) {
         if(!validationUtils.validateProductId(id)){
@@ -71,9 +70,32 @@ public class ProductServiceImpl implements ProductService {
         return ProductTransformer.ProductToProductResponse(product,"details updated");
     }
 
+    @Override
+    public List<Product> getAllProductByBrand(String brand) {
+       return productRepository.findByBrand(brand);
+    }
+
+    @Override
+    public List<Product> getAllProductByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+    @Override
+    public List<Product> getALlProductByNameContaining(String keyword) {
+        return productRepository.findProductsByNameContaining(keyword);
+    }
+
+    @Override
+    public List<Product> getALlProductByPriceRange(Double min, Double max) {
+        return productRepository.findProductsByPriceRange(min,max);
+    }
+
 
     @Override
     public String deleteProduct(Long id) {
+        if(!validationUtils.validateProductId(id)){
+            throw new ProductNotFoundException("invalid Product id");
+        }
         productRepository.deleteById(id);
         return "product deleted";
     }
